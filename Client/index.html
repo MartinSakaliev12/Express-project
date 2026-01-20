@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
     <title>Document</title>
 </head>
+
 <body>
     <main>
         <table id="table" class="users-table">
+            <thead>
+                <tr>
+                    <th>Аватар</th>
+                    <th>Име</th>
+                    <th>Имейл</th>
+                    <th><button class="add-btn" id="add-btn">Add</button></th>
+            </thead>
+            <tbody> <!-- Примерен статичен ред -->
+                
+            </tbody>
+            <tr id="add-user-row" class="add-user-row">
+                    <td> <p></p></td>
+                    <td> <input type="text" id="new-name" placeholder="Име" /> </td>
+                    <td> <input type="email" id="new-email" placeholder="Имейл" /> </td>
+                    <td> <button id="add-user-btn">Добави</button> </td>
+                </tr>
         </table>
         <button id="loadBtn">Load users</button>
     </main>
 
     <script src="index.js"></script>
 </body>
+
 </html>

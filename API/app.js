@@ -2,11 +2,12 @@ import bodyParser from "body-parser"
 import express from "express"
 import router from "./crudControler.js"
 import sequelize from "./database.js"
+import cors from "cors"
 
 const app = express()
 
 app.use(bodyParser.urlencoded({extended:false}))
-
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
