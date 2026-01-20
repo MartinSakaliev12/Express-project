@@ -16,8 +16,13 @@ const AVATAR_COLORS = [
 
 console.log(table)
 loadButton.addEventListener("click", loadUsers)
+loadButton.addEventListener("click",isLoaded)
 
 
+
+function isLoaded(){
+    loadButton.style.display = "none"
+}
 
 async function getUsers() {
     let users
@@ -36,9 +41,13 @@ function addFormVisibleOrNot() {
     if (!isAddFormVisible) {
         isAddFormVisible = true
         addForm.style.display = "contents"
+        addButton.textContent = "Stop"
+        addButton.style.backgroundColor = "red";
     } else {
         isAddFormVisible = false;
         addForm.style.display = "none"
+        addButton.textContent = "Add"
+        addButton.style.backgroundColor = "orange";
     }
 
 }
@@ -59,6 +68,7 @@ async function loadUsers() {
         let deleteButton = document.createElement("button")
         deleteButton.textContent = "Delete"
         deleteButton.classList.add("delete-btn")
+        deleteButton.dataset.id = user.id
 
         let tableDataAvatar = document.createElement("td")
         let tableDataName = document.createElement("td")
@@ -93,9 +103,8 @@ document.addEventListener("click", async (e) => {
     const tr = e.target.closest("tr");
     const id = e.target.dataset.id;
 
-    // 🔥 Вземаме данните правилно
     const response = await fetch(`http://localhost:3000/users/${id}`);
-    const user = await response.json(); // ← това липсва при теб
+    const user = await response.json(); 
 
     const { name, email } = user;
 
@@ -151,6 +160,31 @@ document.addEventListener("click", async (e) => {
     }
 });
 
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("delete-btn")) {
+    const tr = e.target.closest("tr");
+    const id = e.target.dataset.id;
+
+    const confirmed = confirm("Are you sure you want to delele it");
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(`http://localhost:3000/users/${id}`, {
+        method: "DELETE"
+      });
+
+      if (!response.ok) {
+        throw new Error("Error");
+      }
+
+      
+      tr.remove();
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error!");
+    }
+  }
+});
 
 
 document.getElementById("add-user-btn").addEventListener("click", async () => {
@@ -199,7 +233,7 @@ document.getElementById("add-user-btn").addEventListener("click", async () => {
 
 
 
-console.log(getInitials(null, "johndoe@mail.com"))
+
 function getInitials(name, email) {
     // trim form and last part
     // happy path "Martin Sakaliev"  
@@ -257,7 +291,7 @@ function getInitials(name, email) {
 
 
 
-console.log(getColors("J"))
+
 function getColors(initials) {
     if (initials == "" || initials == null) {
         return AVATAR_COLORS[0]
