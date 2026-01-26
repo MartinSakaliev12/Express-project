@@ -1,1 +1,111 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    text-align: left;
+
+    p {
+        font-weight: 800;
+        font-size: 2rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-align: center;
+    }
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+
+button {
+    padding: 6px 10px;
+    margin-right: 6px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.edit-btn {
+    background-color: #3498db;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #2980b9;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+.add-btn {
+    background-color: orange;
+    font-weight: 400;
+
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+input {
+    width: 95%;
+    padding: 6px;
+    box-sizing: border-box;
+}
+.add-user-row{
+    display: none;
+}
+button {
+    padding: 6px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #2ecc71;
+
+    color .users-table tr>th {
+        border: 1px solid grey;
+        padding: 0.5rem;
+        font-size: 1.5rem;
+        border-radius: 100%;
+
+        color: black;
+    }
+}
