@@ -9,7 +9,15 @@
                     <th><button class="add-btn" id="add-btn">Add</button></th>
             </thead>
             <tbody> <!-- Примерен статичен ред -->
-                <tr app-user-row></tr>
+                @if(users$ == null){
+
+                }
+                @else {
+                    @for(user of users$|async;track user.id){
+                        <tr app-user-row [user]="user"></tr>
+                    }
+                    
+                }
             </tbody>
             <tr id="add-user-row" class="add-user-row">
                     <td> <p></p></td>
@@ -18,5 +26,5 @@
                     <td> <button id="add-user-btn">Add</button> </td>
                 </tr>
         </table>
-        <button id="loadBtn" >Load users</button>
+        <button id="loadBtn" (click)="loadUsers()" >Load users</button>
     </main>
