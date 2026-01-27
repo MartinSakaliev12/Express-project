@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { User } from '../../shared/models/user.model';
 import { UserUtils } from '../../core/utils/user.utils';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: '[app-user-row]',
@@ -12,22 +13,31 @@ import { FormsModule } from '@angular/forms';
 export class AvatarComponent {
   isEditing:boolean = false;
   @Input() user:User|null = null
-
   newName:string|undefined = ""
   newEmail:string|undefined = ""
-
   
   userUtils = new UserUtils()
   
+  constructor(private userService:UserService){
+
+  }
+
   get initial():string{
     return this.userUtils.getInitials(this.user?.name,this.user?.email)
   }
   get backGroundColor():string{
     return this.userUtils.getColors(this.initial)
   }
-  stratEditing():void{
+  startEditing():void{
     this.newName = this.user?.name
     this.newEmail = this.user?.email
     this.isEditing=true;
+  }
+  stopEditing():void{
+    this.isEditing= false;
+  }
+  edit(){
+    this.stopEditing()
+    return this.userService.editUser(this.newName,this.newEmail,this.user?.id).subscribe(data=>this.user=data)
   }
 }

@@ -20,4 +20,7 @@ export class UserService{
         
         return this.httpClient.post<User>(`http://localhost:3000/users/create`,{name,email})
     }
+    editUser(name:string|undefined,email:string|undefined,id:string|undefined):Observable<User>{
+        return this.httpClient.put<User>(`${this.url}/${id}`,{name,email})
+    }
 }

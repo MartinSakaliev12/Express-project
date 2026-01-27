@@ -7,7 +7,7 @@
     <td>{{user?.name}}</td>
     <td>{{user?.email}}</td>
     <td>
-      <button class="edit-btn" data-id="4" (click)="stratEditing()">Edit</button>
+      <button class="edit-btn" data-id="4" (click)="startEditing()">Edit</button>
       <button class="delete-btn" data-id="4">Delete</button>
     </td>
   }@else {
@@ -31,7 +31,8 @@
   </td>
 
   <td>
-    <button  class="add-btn">Add</button>
+    <button  class="add-btn" (click)="edit()">Edit</button>
+    <button  class="add-btn" style="background-color: red" (click)="stopEditing()">Stop</button>
   </td>
 
   }
