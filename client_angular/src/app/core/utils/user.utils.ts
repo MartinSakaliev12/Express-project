@@ -1,58 +1,68 @@
 
 
 
-export class UserUtils{
-    getInitials(name:string, email:string):string|undefined{
-    // trim form and last part
-    // happy path "Martin Sakaliev"  
-    // if there is only name and email and first symbol is same return it
-    // if has name and last name get from name
-    // create to work if it has empty name or emty email
-    if (name != null) {
-        name = name.trim()
-    }
-    if (email != null) {
-        email = email.trim()
-    }
+export class UserUtils {
+    private AVATAR_COLORS = [
+    "#1ABC9C", // turquoise
+    "#2ECC71", // emerald
+    "#3498DB", // peter river
+    "#9B59B6", // amethyst
+    "#34495E", // wet asphalt
+    "#16A085", // green sea
+    "#27AE60", // nephritis
+    "#2980B9", // belize hole
+    "#8E44AD", // wisteria
+    "#2C3E50"  // midnight blue
+];
+    getInitials(name: string | null | undefined, email: string | null | undefined): string {
+        // 1. Изчистваме входните данни
+        const cleanName = name?.trim() || "";
+        const cleanEmail = email?.trim() || "";
 
-    if (name != "" && name != null && email != "" && email != null) {
-        const splitedName = name.split(/\s+/)
-        if (splitedName.length != 1) {
-            let firstInitial = splitedName[0][0].toUpperCase()
-            let secondInital = splitedName[splitedName.length - 1][0].toUpperCase()
-            return firstInitial + secondInital
-        } else {
-            let firstInitial = splitedName[0][0].toUpperCase()
-            if (firstInitial == email[0].toUpperCase()) {// to check is first symbol is same as the email and if it is to return it but not workinmg
-                return firstInitial
+        // СЦЕНАРИЙ 1: Имаме Име (независимо дали има имейл)
+        if (cleanName !== "") {
+            const splitedName = cleanName.split(/\s+/);
+
+            if (splitedName.length > 1) {
+                // "Martin Sakaliev" -> MS
+                return (splitedName[0][0] + splitedName[splitedName.length - 1][0]).toUpperCase();
             } else {
-                //TOdo to return first symbol from email and name when they are different
-                return firstInitial + email[0].toUpperCase();
+                const firstInitial = splitedName[0][0].toUpperCase();
+                // Ако има имейл и първата му буква е различна -> ИмеПърваБуква + ИмейлПърваБуква
+                if (cleanEmail !== "" && firstInitial !== cleanEmail[0].toUpperCase()) {
+                    return firstInitial + cleanEmail[0].toUpperCase();
+                }
+                // Ако са еднакви или няма имейл -> Само първа буква от името
+                return firstInitial;
             }
         }
-    } else if (name == "" || name == null && email != "" && email != null) {
-        let [namePart, emailPart] = email.split('@')
-        let splitedNamePart = namePart.split(/[._-]+/)
-        if (splitedNamePart.length != 1) {
 
-            let firstInitial = splitedNamePart[0][0].toUpperCase();
-            let secondInital = splitedNamePart[splitedNamePart.length - 1][0].toUpperCase();
-            return firstInitial + secondInital;
-        } else {
-            return splitedNamePart[0][0].toUpperCase();
+        // СЦЕНАРИЙ 2: Нямаме име, но имаме Имейл
+        if (cleanEmail !== "") {
+            const [namePart] = cleanEmail.split('@');
+            const splitedEmailName = namePart.split(/[._-]+/);
+
+            if (splitedEmailName.length > 1) {
+                // "martin.sakaliev@email.com" -> MS
+                return (splitedEmailName[0][0] + splitedEmailName[splitedEmailName.length - 1][0]).toUpperCase();
+            }
+            return splitedEmailName[0][0].toUpperCase();
         }
 
-
-    } else if (name != "" && name != null && email == "" || email == null) {
-        const splitedName = name.split(/\s+/)
-        if (splitedName.length != 1) {
-            let firstInitial = splitedName[0][0].toUpperCase()
-            let secondInital = splitedName[splitedName.length - 1][0].toUpperCase()
-            return firstInitial + secondInital
-        } else {
-            return splitedName[0][0].toUpperCase()
-        }
+        // СЦЕНАРИЙ 3: (Критичен за грешката) - Ако всичко е празно
+        // Този ред гарантира, че функцията ВИНАГИ връща string
+        return "?";
     }
 
+     getColors(initials:string) {
+    if (initials == "" || initials == null) {
+        return this.AVATAR_COLORS[0]
+    }
+    let sum = 0;
+    for (let i = 0; i < initials.length; i++) {
+        sum += initials.charCodeAt(i)
+    }
+    const colorIndex = sum % 10
+    return this.AVATAR_COLORS[colorIndex]
 }
 }
