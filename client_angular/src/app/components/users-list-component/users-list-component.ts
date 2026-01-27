@@ -38,6 +38,7 @@ export class UsersListComponent {
   }
   addUser(){
     console.log('adawdawdawd')
+    this.stopAddingUser()
     this.userService.createUser(this.inputName,this.inputEmail).subscribe(data=>this.users?.push(data))
     
   }
