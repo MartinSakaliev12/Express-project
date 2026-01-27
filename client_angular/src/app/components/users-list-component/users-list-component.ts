@@ -8,5 +8,6 @@ import { AvatarComponent } from '../avatar-component/avatar-component';
   styleUrl: './users-list-component.css',
 })
 export class UsersListComponent {
-
+  //todo add load button to work
+  
 }
