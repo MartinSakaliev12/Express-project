@@ -12,7 +12,9 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './users-list-component.css',
 })
 export class UsersListComponent {
+  //todo create loading state
   users$:Observable<User[]>|null=null
+  isAdding:boolean = false
   constructor(private userService:UserService){
 
   }
@@ -20,5 +22,10 @@ export class UsersListComponent {
   loadUsers(){
     this.users$ = this.userService.getUsers()
   }
-  
+  addUser(){
+    this.isAdding = true;
+  }
+  stopAddingUser(){
+    this.isAdding = false;
+  }
 }

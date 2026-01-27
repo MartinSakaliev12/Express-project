@@ -6,7 +6,12 @@
                     <th>Avatar</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th><button class="add-btn" id="add-btn">Add</button></th>
+                    @if(isAdding){
+                        <th><button class="add-btn" id="add-btn" (click)="stopAddingUser()" style="background-color: red">Stop</button></th>
+                    }@else {
+
+                        <th><button class="add-btn" id="add-btn" (click)="addUser()" >Add</button></th>
+                    }
             </thead>
             <tbody> <!-- Примерен статичен ред -->
                 @if(users$ == null){
@@ -19,12 +24,17 @@
                     
                 }
             </tbody>
-            <tr id="add-user-row" class="add-user-row">
+            @if(isAdding == false){
+
+            }@else {
+
+                <tr id="add-user-row" class="add-user-row">
                     <td> <p></p></td>
                     <td> <input type="text" id="new-name" placeholder="Име" /> </td>
                     <td> <input type="email" id="new-email" placeholder="Имейл" /> </td>
                     <td> <button id="add-user-btn">Add</button> </td>
                 </tr>
+            }
         </table>
         <button id="loadBtn" (click)="loadUsers()" >Load users</button>
     </main>

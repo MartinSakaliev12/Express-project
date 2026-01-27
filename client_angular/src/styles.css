@@ -91,7 +91,7 @@ input {
     box-sizing: border-box;
 }
 .add-user-row{
-    display: none;
+    display: table-row;
 }
 button {
     padding: 6px 10px;
