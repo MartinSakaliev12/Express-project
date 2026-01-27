@@ -23,4 +23,7 @@ export class UserService{
     editUser(name:string|undefined,email:string|undefined,id:string|undefined):Observable<User>{
         return this.httpClient.put<User>(`${this.url}/${id}`,{name,email})
     }
+    deleteUser(id:string|undefined){
+        return this.httpClient.delete(`${this.url}/${id}`)
+    }
 }

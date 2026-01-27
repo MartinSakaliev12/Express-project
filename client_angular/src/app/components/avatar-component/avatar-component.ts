@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { User } from '../../shared/models/user.model';
 import { UserUtils } from '../../core/utils/user.utils';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,8 @@ import { UserService } from '../../core/services/user.service';
 export class AvatarComponent {
   isEditing:boolean = false;
   @Input() user:User|null = null
+  @Output() deleteUserEvent = new EventEmitter<string|undefined>()
+
   newName:string|undefined = ""
   newEmail:string|undefined = ""
   
@@ -39,5 +41,10 @@ export class AvatarComponent {
   edit(){
     this.stopEditing()
     return this.userService.editUser(this.newName,this.newEmail,this.user?.id).subscribe(data=>this.user=data)
+  }
+  deleteUser(){
+    console.log(this.user?.id)
+    
+    return this.userService.deleteUser(this.user?.id).subscribe(data => this.deleteUserEvent.emit(this.user?.id))
   }
 }

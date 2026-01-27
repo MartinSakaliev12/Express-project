@@ -19,7 +19,9 @@
                 }
                 @else {
                     @for(user of users;track user.id){
-                        <tr app-user-row [user]="user"></tr>
+                        <tr app-user-row [user]="user"
+                            (deleteUserEvent)="onDelete(user.id)"
+                        ></tr>
                     }
                     
                 }

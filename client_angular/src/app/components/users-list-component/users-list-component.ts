@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class UsersListComponent {
   //todo create loading state
   //todo add messages on error
-  users:User[]|null = null
+  users:User[]|undefined = undefined
   users$:Observable<User[]>|null=null
   isAdding:boolean = false
 
@@ -41,5 +41,8 @@ export class UsersListComponent {
     this.stopAddingUser()
     this.userService.createUser(this.inputName,this.inputEmail).subscribe(data=>this.users?.push(data))
     
+  }
+  onDelete(id:string){
+    this.users = this.users?.filter(user => user.id !== id)
   }
 }
