@@ -10,7 +10,7 @@
                         <th><button class="add-btn" id="add-btn" (click)="stopAddingUser()" style="background-color: red">Stop</button></th>
                     }@else {
 
-                        <th><button class="add-btn" id="add-btn" (click)="addUser()" >Add</button></th>
+                        <th><button class="add-btn" id="add-btn" (click)="startAddingUser()" >Add</button></th>
                     }
             </thead>
             <tbody> <!-- Примерен статичен ред -->
@@ -30,9 +30,9 @@
 
                 <tr id="add-user-row" class="add-user-row">
                     <td> <p></p></td>
-                    <td> <input type="text" id="new-name" placeholder="Име" /> </td>
-                    <td> <input type="email" id="new-email" placeholder="Имейл" /> </td>
-                    <td> <button id="add-user-btn">Add</button> </td>
+                    <td> <input [(ngModel)]="inputName"  type="text" id="new-name" placeholder="Име" /> </td>
+                    <td> <input [(ngModel)]="inputEmail" type="email" id="new-email" placeholder="Имейл" /> </td>
+                    <td> <button id="add-user-btn" (click)="addUser()">Add</button> </td>
                 </tr>
             }
         </table>
