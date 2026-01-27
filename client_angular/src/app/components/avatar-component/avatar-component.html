@@ -1,10 +1,38 @@
 
+  @if(!isEditing){
+
+    <td>
+      <p [style.background-color]="backGroundColor">{{initial}}</p>
+    </td>
+    <td>{{user?.name}}</td>
+    <td>{{user?.email}}</td>
+    <td>
+      <button class="edit-btn" data-id="4" (click)="stratEditing()">Edit</button>
+      <button class="delete-btn" data-id="4">Delete</button>
+    </td>
+  }@else {
+
   <td>
     <p [style.background-color]="backGroundColor">{{initial}}</p>
   </td>
-  <td>{{user?.name}}</td>
-  <td>{{user?.email}}</td>
+
   <td>
-    <button class="edit-btn" data-id="4">Edit</button>
-    <button class="delete-btn" data-id="4">Delete</button>
+    <input type="text" 
+           [(ngModel)]="newName" 
+           placeholder="Име" 
+           class="edit-name" />
   </td>
+
+  <td>
+    <input type="email" 
+           [(ngModel)]="newEmail" 
+           placeholder="Имейл" 
+           class="edit-email" />
+  </td>
+
+  <td>
+    <button  class="add-btn">Add</button>
+  </td>
+
+  }
+  
