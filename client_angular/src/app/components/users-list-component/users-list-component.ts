@@ -8,13 +8,14 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-users-list-component',
-  imports: [ FormsModule,AsyncPipe, AvatarComponent],
+  imports: [ FormsModule, AvatarComponent],
   templateUrl: './users-list-component.html',
   styleUrl: './users-list-component.css',
 })
 export class UsersListComponent {
   //todo create loading state
   //todo add messages on error
+  users:User[]|null = null
   users$:Observable<User[]>|null=null
   isAdding:boolean = false
 
@@ -25,7 +26,8 @@ export class UsersListComponent {
   }
 
   loadUsers(){
-    this.users$ = this.userService.getUsers()
+    this.userService.getUsers().subscribe(data => {this.users=data; console.log(this.users)})
+    
   }
   startAddingUser(){
     this.isAdding = true;
@@ -35,6 +37,8 @@ export class UsersListComponent {
     this.isAdding = false;
   }
   addUser(){
+    console.log('adawdawdawd')
+    this.userService.createUser(this.inputName,this.inputEmail).subscribe(data=>this.users?.push(data))
     
   }
 }

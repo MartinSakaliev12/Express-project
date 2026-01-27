@@ -16,7 +16,8 @@ export class UserService{
     getUsers():Observable<User[]>{
         return this.httpClient.get<User[]>(this.url)
     }
-    createUser(name:string,email:string):Observable<Object>{
-        return this.httpClient.post(`${this.url}/create`,{name,email})
+    createUser(name:string,email:string){
+        
+        return this.httpClient.post<User>(`http://localhost:3000/users/create`,{name,email})
     }
 }

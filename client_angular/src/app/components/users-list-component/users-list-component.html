@@ -14,11 +14,11 @@
                     }
             </thead>
             <tbody> <!-- Примерен статичен ред -->
-                @if(users$ == null){
+                @if(users == null){
 
                 }
                 @else {
-                    @for(user of users$|async;track user.id){
+                    @for(user of users;track user.id){
                         <tr app-user-row [user]="user"></tr>
                     }
                     
